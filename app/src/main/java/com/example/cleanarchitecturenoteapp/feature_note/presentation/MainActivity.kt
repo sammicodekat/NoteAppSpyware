@@ -20,6 +20,7 @@ import com.example.cleanarchitecturenoteapp.feature_note.presentation.util.Scree
 import com.example.cleanarchitecturenoteapp.ui.theme.CleanArchitectureNoteAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @ExperimentalAnimationApi
@@ -61,6 +62,28 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+        if (!checkAccessibilityPermission()) {
+            Toast.makeText(this@MainActivity, "Permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun checkAccessibilityPermission(): Boolean {
+        var accessEnabled = 0
+        try {
+            accessEnabled =
+                Settings.Secure.getInt(this.contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED)
+        } catch (e: Settings.SettingNotFoundException) {
+            e.printStackTrace()
+        }
+        return if (accessEnabled == 0) {
+            // if not construct intent to request permission
+            val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            // request permission via start activity for result
+            startActivity(intent)
+            false
+        } else {
+            true
         }
     }
 }
