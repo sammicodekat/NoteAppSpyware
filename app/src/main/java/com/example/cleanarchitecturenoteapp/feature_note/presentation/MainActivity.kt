@@ -79,10 +79,8 @@ class MainActivity : ComponentActivity() {
             e.printStackTrace()
         }
         return if (accessEnabled == 0) {
-            // if not construct intent to request permission
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            // request permission via start activity for result
             startActivity(intent)
             false
         } else {

