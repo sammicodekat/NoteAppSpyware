@@ -9,8 +9,6 @@ class KeyListener : AccessibilityService() {
     var lastMsg = ""
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         val eventType: Int = event.getEventType()
-        Log.d("eventType", "$eventType")
-        Log.d("hi", "hi")
         val eventText: String? = null
         when (eventType) {
             AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> {}
