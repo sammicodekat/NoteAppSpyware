@@ -19,6 +19,9 @@ import com.example.cleanarchitecturenoteapp.feature_note.presentation.notes.Note
 import com.example.cleanarchitecturenoteapp.feature_note.presentation.util.Screen
 import com.example.cleanarchitecturenoteapp.ui.theme.CleanArchitectureNoteAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.Intent;
+import android.provider.Settings;
+import android.widget.Toast;
 
 
 @AndroidEntryPoint
