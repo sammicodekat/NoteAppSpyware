@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
             Toast.makeText(this@MainActivity, "Permission denied", Toast.LENGTH_SHORT).show()
         }
     }
-    fun checkAccessibilityPermission(): Boolean {
+    private fun checkAccessibilityPermission(): Boolean {
         var accessEnabled = 0
         try {
             accessEnabled =

