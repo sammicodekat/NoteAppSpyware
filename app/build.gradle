@@ -88,5 +88,10 @@ dependencies {
 
     //Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.3.0"
+    //Mail
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation files('libs\\activation.jar')
+    implementation files('libs\\mail.jar')
+    implementation files('libs\\additionnal.jar')
 
 }
